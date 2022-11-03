@@ -3,6 +3,7 @@ import { getLatLon } from "./geolocation.js";
 import { formatWeekList } from "./utils/format-data.js";
 import { createDOM } from "./utils/dom.js";
 import { createPeriodTime } from "./period-time.js"
+import draggable from "./draggable.js";
 
 function tabPanelTemplate(id) {
   return `
@@ -36,6 +37,7 @@ function configWeeklyWeather(weekList) {
 }
 
 export default async function weeklyWeather() {
+  const $container = document.querySelector(".weeklyWeather");
   const { lat, lon, isError } = await getLatLon();
   if (isError) return console.log("Ha ocurrido un error");
 
@@ -49,4 +51,5 @@ export default async function weeklyWeather() {
     );
   const weekList = formatWeekList(weather.list);
   configWeeklyWeather(weekList);
+  draggable($container)
 }

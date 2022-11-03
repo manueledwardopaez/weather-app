@@ -10,6 +10,7 @@ const week = [
     'Martes',
     'Miercoles',
     'Jueves',
+    'Viernes',
     'Sabado',
 ]
 
