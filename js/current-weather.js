@@ -1,8 +1,9 @@
 /* import weather from "../data/current-weather.js"; */
-import { formatDate, formatTemp } from "./utils/format-data.js";
+import { formatDate, formatTemp, formatSpeed } from "./utils/format-data.js";
 import { weatherConditionCodes } from "./constants.js"
 import { getLatLon } from "./geolocation.js"
 import { getCurrentWeather } from "./services/weather.js"
+/* import dayWeatherDetails from "./dayWeather-details.js"; */
 
 //weatherConditionCodes[
 
@@ -21,6 +22,18 @@ function setCurrentDate($el) {
 function setCurrentTemp ($el, temp) {
     $el.textContent = formatTemp(temp)
 }
+
+/* function setMinTemp($el, minTemp) {
+  $el.textContent = formatTemp(minTemp)
+}
+
+function setMaxTemp($el, maxTemp) {
+  $el.textContent = formatTemp(maxTemp)
+}
+
+function setWindSpeed($el, speed) {
+  $el.textContent = formatSpeed(speed)
+} */
 
 function solarStatus (sunriseTime, sunsetTime) {
     const currentHours = new Date().getHours()
@@ -57,10 +70,26 @@ function configCurrentWeather(weather) {
   const $currentWeatherCity = document.querySelector("#current-weather-city");
   const city = weather.name;
   setCurrentCity($currentWeatherCity, city);
+
   //temp
   const $currentWeatherTemp = document.querySelector('#current-weather-temp')
   const temp = weather.main.temp
   setCurrentTemp($currentWeatherTemp, temp)
+
+/*   //min temp
+  const $minWeatherTemp = document.querySelector('#min-weather-temp')
+  const minTemp = weather.main.temp_min
+  setMinTemp($minWeatherTemp, minTemp)
+
+  //max temp
+  const $maxWeatherTemp = document.querySelector('#max-weather-temp')
+  const maxTemp = weather.main.temp_max
+  setMaxTemp($maxWeatherTemp, maxTemp)
+
+  //wind
+  const $windSpeed = document.querySelector('#wind-speed')
+  const speed = weather.wind.speed
+  setWindSpeed($windSpeed, speed) */
 
   //background
   const sunriseTime = new Date(weather.sys.sunrise * 1000)
@@ -69,7 +98,7 @@ function configCurrentWeather(weather) {
   setBackground($app, conditionCode, solarStatus(sunriseTime, sunsetTime))
 }
 
-export default async function currentWeather() {
+export default async function currentWeathher() {
 
   const {lat, lon, isError} = await getLatLon()
   if(isError) return console.log('Ha ocurrido un error')
@@ -84,6 +113,8 @@ export default async function currentWeather() {
     console.log(message)
   }) */
   const { isError: currentWeatherError, data: weather} = await getCurrentWeather(lat, lon)
+  /* debugger */
   if(currentWeatherError) return console.log('oh! Ha ocurrido un error al ubicarte')
   configCurrentWeather(weather);
+  /* dayWeatherDetails() */
 }

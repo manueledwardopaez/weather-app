@@ -34,3 +34,7 @@
   inset-inline-end: 0;
 }
 
+.hideDetails {
+  display: none;
+}
+

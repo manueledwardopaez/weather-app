@@ -12,6 +12,10 @@ export function formatTemp(value) {
   return `${Math.floor(value)}°`;
 }
 
+export function formatSpeed(value) {
+  return `${Math.floor(value*3.6)}`
+}
+
 export function formatWeekList(rawData) {
   let dayList = [];
   const weekList = [];

@@ -4,6 +4,7 @@ import { formatWeekList } from "./utils/format-data.js";
 import { createDOM } from "./utils/dom.js";
 import { createPeriodTime } from "./period-time.js"
 import draggable from "./draggable.js";
+/* import dayWeatherDetails from "./dayWeather-details.js"; */
 
 function tabPanelTemplate(id) {
   return `
@@ -52,4 +53,8 @@ export default async function weeklyWeather() {
   const weekList = formatWeekList(weather.list);
   configWeeklyWeather(weekList);
   draggable($container)
+
+ /*  debugger */
+
 }
+
